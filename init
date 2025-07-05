@@ -17,15 +17,23 @@ DEFAULT_AUTHOR="Software Architecture Team"
 
 # Prompt user for project name, showing default
 read -p "Enter author [${DEFAULT_AUTHOR}]: " USER_INPUT
-AUTHOR="${USER_INPUT:-DEFAULT_AUTHOR}"
+AUTHOR="${USER_INPUT:-$DEFAULT_AUTHOR}"
 
 echo "Using author: $AUTHOR"
 
 # Replace {PROJECT_NAME} and {AUTHOR} in all files under source/
 echo "Updating files in 'source/' directory..."
 
-find source/ -type f -exec sed -i "s/{PROJECT_NAME}/$PROJECT_NAME/g" {} +
-find source/ -type f -exec sed -i "s/{AUTHOR}/$AUTHOR/g" {} +
+find ./source -type f -exec sed -i "s/{PROJECT_NAME}/$PROJECT_NAME/g" {} +
+find ./source -type f -exec sed -i "s/{AUTHOR}/$AUTHOR/g" {} +
+
+sed -i "s/{PROJECT_NAME}/$PROJECT_NAME/g" ./README.md
+sed -i "s/{AUTHOR}/$AUTHOR/g" ./README.md
+
+# Remove line starting with "# Recommended:" from README.md if it exists
+if [[ -f "README.md" ]]; then
+    sed -i '/^\n# Recommended:/d' README.md
+fi
 
 echo "All done."
 
