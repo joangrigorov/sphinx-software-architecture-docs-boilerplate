@@ -1,0 +1,5 @@
+Stakeholder,Relevant Viewpoints,Why Relevant
+System End Users,C&C Viewpoint,Runtime interactions affecting user experience.
+Investors,"Module decomposition, Allocation",Strategic alignment and cost-effective deployment.
+CEO,"Module decomposition, Allocation",Resource mapping and task management for timelines and budgets.
+Software Developers,"Module decomposition, C&C, Allocation","Code structure, runtime behavior, and infrastructure setup."

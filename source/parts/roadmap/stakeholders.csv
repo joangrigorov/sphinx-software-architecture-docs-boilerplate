@@ -1,0 +1,5 @@
+Stakeholder,Role/Description,Concerns
+System End Users,"Drivers, Enterprise customers, Administrators","Reliability, performance, availability, security, usability, and cost"
+Investors,Capital investors,"Alignment with cost, corporate strategy, financial performance, and legal compliance"
+CEO,Company CEO,"Development timelines, budget, and return on investment"
+Software Developers,Developers of the {PROJECT_NAME} platform,"Software code quality, maintainability, extensibility, and performance"

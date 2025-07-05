@@ -1,0 +1,12 @@
+###################################################################################
+## This file specifies Python dependencies that can be installed using pip        #
+###################################################################################
+
+# Sphinx Themes
+renku-sphinx-theme
+sphinx_rtd_theme
+
+# Add-ons
+sphinx-autobuild
+sphinxcontrib-bibtex
+graphviz
