@@ -14,9 +14,9 @@ sys.path.insert(0, os.path.abspath('.'))
 
 project = '{PROJECT_NAME} Software Architecture Documentation'
 copyright = (
-   f'{datetime.datetime.now().year}' + ', {PROJECT_NAME} Software Architecture Team'
+   f'{datetime.datetime.now().year}' + ', {PROJECT_NAME} {AUTHOR}'
 )
-author = '{PROJECT_NAME} Software Architecture Team'
+author = '{AUTHOR}'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration

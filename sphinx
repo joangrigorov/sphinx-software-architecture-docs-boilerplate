@@ -24,7 +24,7 @@ if [[ "${1}" == "autobuild" ]]; then
     --port 80 \
     --pre-build "make clean" \
     source \
-    _build \
+    build \
     "$@"
   exit
 fi
@@ -35,4 +35,4 @@ docker run \
   -v "${PWD}":/docs \
   --user "${UID}":"${UID}" \
   ${docker_image} \
-  bash -c 'make clean && sphinx-build -M latexpdf source _build'
+  bash -c 'make clean && sphinx-build -M latexpdf source build'
