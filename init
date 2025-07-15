@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+
+# Get the current directory name
+DIR_NAME=$(basename "$PWD")
+
+# Convert kebab-case to Title Case (es.g., my-project -> My Project)
+DEFAULT_NAME=$(echo "$DIR_NAME" | sed -E 's/-/ /g' | awk '{for(i=1;i<=NF;++i) $i=toupper(substr($i,1,1)) substr($i,2)}1')
+
+# Prompt user for project name, showing default
+read -p "Enter project name [${DEFAULT_NAME}]: " USER_INPUT
+PROJECT_NAME="${USER_INPUT:-$DEFAULT_NAME}"
+
+echo "Using project name: $PROJECT_NAME"
+
+# The default author
+DEFAULT_AUTHOR="Software Architecture Team"
+
+# Prompt user for project name, showing default
+read -p "Enter author [${DEFAULT_AUTHOR}]: " USER_INPUT
+AUTHOR="${USER_INPUT:-$DEFAULT_AUTHOR}"
+
+echo "Using author: $AUTHOR"
+
+echo "Updating files in 'source/' directory..."
+
+find ./source -type f -exec sed -i "s/{PROJECT_NAME}/$PROJECT_NAME/g" {} +
+find ./source -type f -exec sed -i "s/{AUTHOR}/$AUTHOR/g" {} +
+
+sed -i "s/{PROJECT_NAME}/$PROJECT_NAME/g" ./README.md
+sed -i "s/{AUTHOR}/$AUTHOR/g" ./README.md
+
+if [[ -f "README.md" ]]; then
+    sed -i '/^# Recommended:/d' README.md
+fi
+
+echo "All done."
+
+# Prompt to delete the script
+read -p "The init script finished. You no longer need this script. Press ENTER or Y to delete it, or enter N to keep it: " CONFIRM
+
+CONFIRM=${CONFIRM,,}  # to lowercase
+
+if [[ "$CONFIRM" == "y" || "$CONFIRM" == "" ]]; then
+    echo "Deleting script..."
+    rm -- "$0"
+else
+    echo "Script kept."
+fi
+

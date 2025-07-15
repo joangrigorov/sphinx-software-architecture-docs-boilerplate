@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+
+# increase this version whenever the docker image changes
+docker_image=software-architecture-docs:v1-dev
+
+if [[ "$(docker images -q ${docker_image} 2> /dev/null)" == "" ]]; then
+  docker build --no-cache -t ${docker_image} -f docker/sphinx/Dockerfile .
+fi
+
+if [[ "${1}" == "autobuild" ]]; then
+  shift
+
+  xdg-open http://localhost:8000
+
+  docker run \
+    --rm \
+    -v "${PWD}":/docs \
+    --user "${UID}":"${UID}" \
+    --name sa-docs \
+    -p 8000:80 \
+    ${docker_image} \
+    sphinx-autobuild \
+    --host 0.0.0.0 \
+    --port 80 \
+    --pre-build "make clean" \
+    source \
+    build \
+    "$@"
+  exit
+fi
+
+docker run \
+  --rm \
+  -it \
+  -v "${PWD}":/docs \
+  --user "${UID}":"${UID}" \
+  ${docker_image} \
+  bash -c 'make clean && sphinx-build -M latexpdf source build'
